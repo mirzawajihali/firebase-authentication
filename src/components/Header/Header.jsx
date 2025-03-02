@@ -1,9 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <div>
-            <h1>This is header</h1>
+        <div className='flex gap-4'>
+            <NavLink className='text-white font-bold' to="/">Home</NavLink>
+            <NavLink className='text-white font-bold' to="/login">Login</NavLink>
         </div>
     );
 };
