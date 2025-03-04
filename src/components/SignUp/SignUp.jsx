@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import auth from '../../firebase/firebase.init';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const [success, setSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const handleSignUp = (event) => {
@@ -59,19 +62,26 @@ const SignUp = () => {
  
  <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
  <form onSubmit={ handleSignUp}>
-      <div className="card-body">
+      <div className="card-body relative">
         <fieldset className="fieldset">
           <label className="fieldset-label">Email</label>
           <input type="email" name='email' className="input" placeholder="Email" />
           <label className="fieldset-label">Password</label>
-          <input name='password' type="password" className="input" placeholder="Password" />
+          <input name='password'
+           type={showPassword ? 'text' : 'password'}
+            className="input" placeholder="Password" />
+          <button onClick={()=> setShowPassword(!showPassword)} className='btn btn-xs absolute right-12 top-32'>{
+              showPassword? <FaEyeSlash /> : <FaEye />
+
+            
+            }</button>
           <div><a className="link link-hover">Forgot password?</a></div>
           <button type='submit' className="btn btn-neutral mt-4">Register</button>
         </fieldset>
       </div>
       </form>
     </div>
- 
+ <FaEye />
   </div>
 </div>
 {
@@ -79,7 +89,11 @@ const SignUp = () => {
         }{
             success && <div className="text-green-500  p-4 text-center">User created successfully</div>
         }
+
+        <p>Already have an accout? Go <Link to="/login">Log In</Link></p>
         </div>
+
+
 
        
     );
